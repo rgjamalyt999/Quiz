@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>JAMAL // CYBER MEMORY & MATHS V4</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for ultimate readability -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        rajdhani: ['Rajdhani', 'sans-serif'],
+                        code: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        matrixGreen: '#00ff66',
+                        cyberCyan: '#00f0ff',
+                        darkBg: '#020604',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #020604;
+            color: #00ff66;
+            font-family: 'Rajdhani', sans-serif;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Phone Screen Frame (19:9 / Mobile Optimized Aspect Ratio) */
+        .phone-container {
+            width: 100%;
+            max-width: 430px;
+            height: 100vh;
+            max-height: 920px;
+            background: rgba(2, 6, 4, 0.98);
+            border: 2px solid rgba(0, 255, 102, 0.35);
+            box-shadow: 0 0 30px rgba(0, 255, 102, 0.15);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (min-width: 480px) {
+            .phone-container {
+                border-radius: 36px;
+                margin: 20px 0;
+            }
+        }
+
+        .matrix-glow {
+            text-shadow: 0 0 10px rgba(0, 255, 102, 0.7);
+        }
+        .box-glow {
+            box-shadow: 0 0 15px rgba(0, 255, 102, 0.15), inset 0 0 10px rgba(0, 255, 102, 0.05);
+        }
+        .box-glow-cyan {
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.15), inset 0 0 10px rgba(0, 240, 255, 0.05);
+        }
+        .glass-panel {
+            background: rgba(3, 14, 8, 0.92);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 255, 102, 0.3);
+        }
+        .glass-panel-cyan {
+            background: rgba(3, 14, 14, 0.92);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+        }
+
+        /* Custom Scrollbar for phone screen content */
+        .scroll-area::-webkit-scrollbar {
+            width: 4px;
+        }
+        .scroll-area::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .scroll-area::-webkit-scrollbar-thumb {
+            background: rgba(0, 255, 102, 0.4);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="selection:bg-matrixGreen selection:text-black">
+
+    <!-- Matrix Rain Canvas Background -->
+    <canvas id="matrixCanvas" class="fixed inset-0 pointer-events-none z-0 opacity-15"></canvas>
+
+    <!-- Phone App Container -->
+    <div class="phone-container z-10">
+
+        <!-- Header / Status Bar -->
+        <header class="w-full border-b border-matrixGreen/30 glass-panel py-3 px-4 flex justify-between items-center shrink-0">
+            <div class="flex items-center space-x-2">
+                <div class="w-8 h-8 rounded-lg border border-matrixGreen flex items-center justify-center box-glow">
+                    <i class="fa-solid fa-terminal text-matrixGreen text-sm"></i>
+                </div>
+                <div>
+                    <h1 class="font-rajdhani font-bold text-lg tracking-wider matrix-glow uppercase leading-none">JAMAL // V4</h1>
+                    <span class="text-[10px] text-cyberCyan font-code tracking-widest">SECURE HUD</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-2">
+                <button onclick="openReferenceModal()" class="w-8 h-8 rounded-lg border border-matrixGreen/60 text-matrixGreen text-xs flex items-center justify-center hover:bg-matrixGreen/20 transition" title="Cheat Sheet">
+                    <i class="fa-solid fa-book-bookmark"></i>
+                </button>
+                <button onclick="toggleAudio()" id="audioToggleBtn" class="w-8 h-8 rounded-lg border border-matrixGreen text-matrixGreen text-xs flex items-center justify-center hover:bg-matrixGreen/20 transition" title="Audio Toggle">
+                    <i class="fa-solid fa-volume-high" id="audioIcon"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Scrollable Main Content Area -->
+        <main class="flex-grow overflow-y-auto scroll-area p-4 flex flex-col justify-center">
+
+            <!-- Home / Mode Selection Screen -->
+            <div id="homeScreen" class="w-full space-y-3.5 my-auto">
+                <div class="text-center space-y-1 mb-2">
+                    <h2 class="font-rajdhani text-2xl font-black text-white matrix-glow">SELECT PROTOCOL</h2>
+                    <p class="text-xs text-gray-300 font-code">Tap a module to start high-speed training.</p>
+                </div>
+
+                <!-- Mode 1: Alphabet Position -->
+                <div onclick="startQuiz('position')" class="glass-panel p-3.5 rounded-xl border border-matrixGreen/40 box-glow hover:border-matrixGreen cursor-pointer group flex items-center justify-between transition-all">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-matrixGreen/10 border border-matrixGreen/30 flex items-center justify-center text-matrixGreen text-lg">
+                            <i class="fa-solid fa-list-ol"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-rajdhani text-base font-bold text-white group-hover:text-matrixGreen">Alphabet Positions</h3>
+                            <p class="text-[11px] text-gray-300 font-code">A (1) to Z (26) values</p>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-matrixGreen text-sm"></i>
+                </div>
+
+                <!-- Mode 2: Opposite Pairs -->
+                <div onclick="startQuiz('opposite')" class="glass-panel-cyan p-3.5 rounded-xl border border-cyberCyan/40 box-glow-cyan hover:border-cyberCyan cursor-pointer group flex items-center justify-between transition-all">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-cyberCyan/10 border border-cyberCyan/30 flex items-center justify-center text-cyberCyan text-lg">
+                            <i class="fa-solid fa-arrows-left-right"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-rajdhani text-base font-bold text-white group-hover:text-cyberCyan">Opposite Pairs</h3>
+                            <p class="text-[11px] text-gray-300 font-code">A ↔ Z up to M ↔ N</p>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-cyberCyan text-sm"></i>
+                </div>
+
+                <!-- Mode 3: Squares (1 to 30) -->
+                <div onclick="startQuiz('squares')" class="glass-panel p-3.5 rounded-xl border border-yellow-500/40 shadow-[0_0_15px_rgba(234,179,8,0.1)] hover:border-yellow-400 cursor-pointer group flex items-center justify-between transition-all">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center text-yellow-400 text-lg">
+                            <i class="fa-solid fa-calculator"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-rajdhani text-base font-bold text-white group-hover:text-yellow-400">Squares (1 to 30)</h3>
+                            <p class="text-[11px] text-gray-300 font-code">1² = 1 to 30² = 900[span_1](start_span)[span_1](end_span)</p>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-yellow-400 text-sm"></i>
+                </div>
+
+                <!-- Mode 4: Cubes (1 to 20) -->
+                <div onclick="startQuiz('cubes')" class="glass-panel-cyan p-3.5 rounded-xl border border-pink-500/40 shadow-[0_0_15px_rgba(236,72,153,0.1)] hover:border-pink-400 cursor-pointer group flex items-center justify-between transition-all">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-pink-500/10 border border-pink-500/30 flex items-center justify-center text-pink-400 text-lg">
+                            <i class="fa-solid fa-cube"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-rajdhani text-base font-bold text-white group-hover:text-pink-400">Cubes (1 to 20)</h3>
+                            <p class="text-[11px] text-gray-300 font-code">1³ = 1 to 20³ = 8000[span_2](start_span)[span_2](end_span)</p>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-pink-400 text-sm"></i>
+                </div>
+            </div>
+
+            <!-- Quiz Arena Screen -->
+            <div id="quizScreen" class="w-full hidden space-y-4 my-auto">
+                <!-- HUD Details -->
+                <div class="glass-panel p-3 rounded-xl border border-matrixGreen/30 flex justify-between items-center">
+                    <button onclick="returnToHome()" class="px-2.5 py-1 rounded-lg border border-red-500/50 text-red-400 hover:bg-red-500/20 text-[11px] font-code font-bold">
+                        <i class="fa-solid fa-arrow-left mr-1"></i> ABORT
+                    </button>
+                    <div class="text-center">
+                        <div class="text-[10px] text-cyberCyan font-code" id="quizTitleBadge">POSITION</div>
+                        <div class="text-xs font-rajdhani font-bold text-white">Q: <span id="currentQNum">1</span> / <span id="totalQNum">15</span></div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-[10px] text-gray-400 font-code">SCORE</div>
+                        <div class="font-rajdhani font-bold text-matrixGreen text-sm" id="liveScore">0</div>
+                    </div>
+                </div>
+
+                <!-- Question Prompt Card -->
+                <div class="glass-panel p-5 rounded-xl border border-matrixGreen/50 box-glow relative overflow-hidden text-center">
+                    <div class="absolute top-1 right-2 opacity-10 text-6xl font-rajdhani font-black text-matrixGreen pointer-events-none" id="watermarkChar">A</div>
+                    <span class="text-[10px] font-code text-matrixGreen bg-matrixGreen/10 px-2 py-0.5 rounded-full border border-matrixGreen/30 uppercase">DECRYPT TARGET</span>
+                    <h3 class="text-lg sm:text-xl font-rajdhani font-bold text-white mt-2 tracking-wide" id="questionPrompt">What is the exact value?</h3>
+                </div>
+
+                <!-- 4 Options Grid -->
+                <div class="grid grid-cols-1 gap-2.5" id="optionsContainer">
+                    <!-- Dynamic options -->
+                </div>
+
+                <!-- Quiz Footer Action -->
+                <div class="flex justify-between items-center pt-1">
+                    <span class="text-xs font-code text-gray-300" id="streakCounter">Streak: 0 🔥</span>
+                    <button id="nextBtn" onclick="nextQuestion()" class="hidden px-5 py-2 rounded-xl bg-matrixGreen text-black font-rajdhani font-bold text-xs hover:shadow-[0_0_15px_#00ff66] transition-all flex items-center gap-1.5">
+                        NEXT <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quiz Result Screen -->
+            <div id="resultScreen" class="w-full hidden space-y-4 text-center my-auto">
+                <div class="glass-panel p-6 rounded-xl border border-matrixGreen/50 box-glow space-y-4">
+                    <div class="w-16 h-16 rounded-full border-2 border-matrixGreen bg-matrixGreen/10 mx-auto flex items-center justify-center box-glow">
+                        <i class="fa-solid fa-trophy text-2xl text-matrixGreen"></i>
+                    </div>
+                    <div>
+                        <h2 class="font-rajdhani text-2xl font-black text-white matrix-glow">SESSION COMPLETE</h2>
+                        <p class="text-[11px] text-cyberCyan font-code">[ PERFORMANCE DECRYPTED ]</p>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-2 py-3 border-y border-matrixGreen/20">
+                        <div>
+                            <div class="text-[10px] text-gray-400 font-code">SCORE</div>
+                            <div class="font-rajdhani font-bold text-matrixGreen text-lg" id="finalScore">0</div>
+                        </div>
+                        <div>
+                            <div class="text-[10px] text-gray-400 font-code">ACCURACY</div>
+                            <div class="font-rajdhani font-bold text-cyberCyan text-lg" id="finalAccuracy">0%</div>
+                        </div>
+                        <div>
+                            <div class="text-[10px] text-gray-400 font-code">TIME</div>
+                            <div class="font-rajdhani font-bold text-yellow-400 text-lg" id="finalTime">00:00</div>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-2 justify-center pt-1">
+                        <button onclick="restartCurrentQuiz()" class="px-4 py-2 rounded-xl bg-matrixGreen text-black font-rajdhani font-bold text-xs flex items-center gap-1">
+                            <i class="fa-solid fa-rotate-right"></i> RETRY
+                        </button>
+                        <button onclick="returnToHome()" class="px-4 py-2 rounded-xl border border-matrixGreen text-matrixGreen font-rajdhani font-bold text-xs flex items-center gap-1">
+                            <i class="fa-solid fa-house"></i> MENU
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Reference Cheat Sheet Modal -->
+        <div id="referenceModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm hidden flex items-center justify-center p-3">
+            <div class="phone-container w-full h-[90vh] rounded-2xl glass-panel border border-matrixGreen/60 flex flex-col overflow-hidden">
+                <div class="p-3 border-b border-matrixGreen/30 flex justify-between items-center bg-black/80">
+                    <h3 class="font-rajdhani font-bold text-sm text-matrixGreen flex items-center gap-1.5">
+                        <i class="fa-solid fa-database"></i> MASTER REFERENCE SHEET
+                    </h3>
+                    <button onclick="closeReferenceModal()" class="text-gray-400 hover:text-white px-2 py-1 rounded border border-gray-700 text-xs">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                
+                <div class="p-4 overflow-y-auto scroll-area space-y-6 text-xs font-code">
+                    <!-- Alphabets -->
+                    <div>
+                        <h4 class="font-rajdhani text-sm text-cyberCyan font-bold mb-2">Alphabet Positions (A-Z)</h4>
+                        <div class="grid grid-cols-3 gap-1.5" id="cheatSheetPositions"></div>
+                    </div>
+                    <!-- Pairs -->
+                    <div class="pt-3 border-t border-matrixGreen/20">
+                        <h4 class="font-rajdhani text-sm text-matrixGreen font-bold mb-2">Opposite Pairs</h4>
+                        <div class="grid grid-cols-2 gap-1.5" id="cheatSheetPairs"></div>
+                    </div>
+                    <!-- Squares -->
+                    <div class="pt-3 border-t border-matrixGreen/20">
+                        <h4 class="font-rajdhani text-sm text-yellow-400 font-bold mb-2">Squares (1 to 30)[span_3](start_span)[span_3](end_span)</h4>
+                        <div class="grid grid-cols-3 gap-1.5" id="cheatSheetSquares"></div>
+                    </div>
+                    <!-- Cubes -->
+                    <div class="pt-3 border-t border-matrixGreen/20">
+                        <h4 class="font-rajdhani text-sm text-pink-400 font-bold mb-2">Cubes (1 to 20)[span_4](start_span)[span_4](end_span)</h4>
+                        <div class="grid grid-cols-2 gap-1.5" id="cheatSheetCubes"></div>
+                    </div>
+                </div>
+
+                <div class="p-3 border-t border-matrixGreen/30 text-center bg-black/80">
+                    <button onclick="closeReferenceModal()" class="w-full py-2 rounded-xl bg-matrixGreen text-black font-rajdhani font-bold text-xs">
+                        CLOSE CHEAT SHEET
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phone Bottom Bar Indicator -->
+        <footer class="w-full border-t border-matrixGreen/20 py-2 text-center text-[10px] text-gray-500 font-code shrink-0">
+            <span>JAMAL CYBER OS // MOBILE READY</span>
+        </footer>
+
+    </div>
+
+    <!-- JavaScript Game Engine -->
+    <script>
+        // Matrix Rain
+        const canvas = document.getElementById('matrixCanvas');
+        const ctx = canvas.getContext('2d');
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        const katakana = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789<>/-+=*#@';
+        const alphabetChars = katakana.split('');
+        const fontSize = 14;
+        let columns = canvas.width / fontSize;
+        const rainDrops = [];
+        for (let x = 0; x < columns; x++) rainDrops[x] = 1;
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(2, 6, 4, 0.08)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#00ff66';
+            ctx.font = fontSize + 'px monospace';
+            for (let i = 0; i < rainDrops.length; i++) {
+                const text = alphabetChars[Math.floor(Math.random() * alphabetChars.length)];
+                ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+                if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) rainDrops[i] = 0;
+                rainDrops[i]++;
+            }
+        }
+        setInterval(drawMatrix, 35);
+
+        // Web Audio API
+        let audioEnabled = true;
+        let audioCtx = null;
+        function initAudio() {
+            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        function playSound(type) {
+            if (!audioEnabled) return;
+            initAudio();
+            if (!audioCtx) return;
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                const now = audioCtx.currentTime;
+                if (type === 'click') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(440, now);
+                    osc.frequency.exponentialRampToValueAtTime(880, now + 0.04);
+                    gain.gain.setValueAtTime(0.05, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+                    osc.start(now); osc.stop(now + 0.04);
+                } else if (type === 'success') {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(523.25, now);
+                    osc.frequency.setValueAtTime(659.25, now + 0.08);
+                    gain.gain.setValueAtTime(0.1, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+                    osc.start(now); osc.stop(now + 0.25);
+                } else if (type === 'error') {
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(140, now);
+                    osc.frequency.setValueAtTime(90, now + 0.08);
+                    gain.gain.setValueAtTime(0.1, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+                    osc.start(now); osc.stop(now + 0.2);
+                }
+            } catch (e) {}
+        }
+        function toggleAudio() {
+            audioEnabled = !audioEnabled;
+            const icon = document.getElementById('audioIcon');
+            icon.className = audioEnabled ? "fa-solid fa-volume-high" : "fa-solid fa-volume-xmark";
+            playSound('click');
+        }
+
+        // Data Sources
+        const alphabetPositions = Array.from({length: 26}, (_, i) => ({ letter: String.fromCharCode(65 + i), num: i + 1 }));
+        const oppositePairs = [
+            { a: 'A', b: 'Z' }, { a: 'B', b: 'Y' }, { a: 'C', b: 'X' },
+            { a: 'D', b: 'W' }, { a: 'E', b: 'V' }, { a: 'F', b: 'U' },
+            { a: 'G', b: 'T' }, { a: 'H', b: 'S' }, { a: 'I', b: 'R' },
+            { a: 'J', b: 'Q' }, { a: 'K', b: 'P' }, { a: 'L', b: 'O' },
+            { a: 'M', b: 'N' }
+        ];
+        const squaresData = Array.from({length: 30}, (_, i) => ({ n: i + 1, val: (i + 1) * (i + 1) }));
+        const cubesData = Array.from({length: 20}, (_, i) => ({ n: i + 1, val: (i + 1) * (i + 1) * (i + 1) }));
+
+        // Quiz State
+        let currentMode = 'position';
+        let quizQuestions = [];
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let streak = 0;
+        let timerInterval = null;
+        let secondsElapsed = 0;
+        let answeredCurrent = false;
+
+        function startQuiz(mode) {
+            playSound('click');
+            currentMode = mode;
+            score = 0;
+            streak = 0;
+            currentQuestionIndex = 0;
+            secondsElapsed = 0;
+            generateQuestions();
+
+            document.getElementById('homeScreen').classList.add('hidden');
+            document.getElementById('resultScreen').classList.add('hidden');
+            document.getElementById('quizScreen').classList.remove('hidden');
+
+            document.getElementById('quizTitleBadge').innerText = mode.toUpperCase();
+            document.getElementById('totalQNum').innerText = quizQuestions.length;
+            document.getElementById('liveScore').innerText = score;
+
+            startTimer();
+            loadQuestion();
+        }
+
+        function returnToHome() {
+            playSound('click');
+            clearInterval(timerInterval);
+            document.getElementById('quizScreen').classList.add('hidden');
+            document.getElementById('resultScreen').classList.add('hidden');
+            document.getElementById('homeScreen').classList.remove('hidden');
+        }
+
+        function restartCurrentQuiz() { startQuiz(currentMode); }
+
+        function startTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                secondsElapsed++;
+                const mins = Math.floor(secondsElapsed / 60).toString().padStart(2, '0');
+                const secs = (secondsElapsed % 60).toString().padStart(2, '0');
+                // Timer display can be tracked internally or added if needed
+            }, 1000);
+        }
+
+        function generateQuestions() {
+            quizQuestions = [];
+            if (currentMode === 'position') {
+                const shuffled = [...alphabetPositions].sort(() => 0.5 - Math.random()).slice(0, 15);
+                shuffled.forEach(item => {
+                    let wrong = [];
+                    while(wrong.length < 3) {
+                        let r = Math.floor(Math.random() * 26) + 1;
+                        if(r !== item.num && !wrong.includes(r)) wrong.push(r);
+                    }
+                    let options = [...wrong, item.num].sort(() => 0.5 - Math.random());
+                    quizQuestions.push({ prompt: `Position of letter [ ${item.letter} ]?`, watermark: item.letter, correct: item.num, options });
+                });
+            } else if (currentMode === 'opposite') {
+                const shuffled = [...oppositePairs].sort(() => 0.5 - Math.random());
+                shuffled.forEach(item => {
+                    let askA = Math.random() > 0.5;
+                    let given = askA ? item.a : item.b;
+                    let correct = askA ? item.b : item.a;
+                    let wrong = [];
+                    while(wrong.length < 3) {
+                        let p = oppositePairs[Math.floor(Math.random() * oppositePairs.length)];
+                        let ans = askA ? p.b : p.a;
+                        if(ans !== correct && !wrong.includes(ans)) wrong.push(ans);
+                    }
+                    let options = [...wrong, correct].sort(() => 0.5 - Math.random());
+                    quizQuestions.push({ prompt: `Opposite pair of [ ${given} ]?`, watermark: given, correct, options });
+                });
+            } else if (currentMode === 'squares') {
+                const shuffled = [...squaresData].sort(() => 0.5 - Math.random()).slice(0, 15);
+                shuffled.forEach(item => {
+                    let wrong = [];
+                    while(wrong.length < 3) {
+                        let r = squaresData[Math.floor(Math.random() * squaresData.length)].val;
+                        if(r !== item.val && !wrong.includes(r)) wrong.push(r);
+                    }
+                    let options = [...wrong, item.val].sort(() => 0.5 - Math.random());
+                    quizQuestions.push({ prompt: `Value of Square [ ${item.n}² ]?[span_5](start_span)[span_5](end_span)`, watermark: `${item.n}²`, correct: item.val, options });
+                });
+            } else if (currentMode === 'cubes') {
+                const shuffled = [...cubesData].sort(() => 0.5 - Math.random()).slice(0, 15);
+                shuffled.forEach(item => {
+                    let wrong = [];
+                    while(wrong.length < 3) {
+                        let r = cubesData[Math.floor(Math.random() * cubesData.length)].val;
+                        if(r !== item.val && !wrong.includes(r)) wrong.push(r);
+                    }
+                    let options = [...wrong, item.val].sort(() => 0.5 - Math.random());
+                    quizQuestions.push({ prompt: `Value of Cube [ ${item.n}³ ]?[span_6](start_span)[span_6](end_span)`, watermark: `${item.n}³`, correct: item.val, options });
+                });
+            }
+        }
+
+        function loadQuestion() {
+            if (currentQuestionIndex >= quizQuestions.length) {
+                endQuiz();
+                return;
+            }
+            answeredCurrent = false;
+            document.getElementById('nextBtn').classList.add('hidden');
+            
+            const q = quizQuestions[currentQuestionIndex];
+            document.getElementById('currentQNum').innerText = currentQuestionIndex + 1;
+            document.getElementById('questionPrompt').innerText = q.prompt;
+            document.getElementById('watermarkChar').innerText = q.watermark;
+
+            const container = document.getElementById('optionsContainer');
+            container.innerHTML = '';
+
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left p-3.5 rounded-xl border border-matrixGreen/40 bg-black/70 hover:border-matrixGreen font-code text-white text-base transition-all flex items-center justify-between shadow";
+                btn.innerHTML = `
+                    <span class="flex items-center gap-3">
+                        <span class="w-7 h-7 rounded-lg border border-matrixGreen/50 bg-matrixGreen/10 flex items-center justify-center text-xs text-matrixGreen font-rajdhani font-bold">${['A', 'B', 'C', 'D'][idx]}</span>
+                        <span class="font-bold">${opt}</span>
+                    </span>
+                    <i class="fa-solid fa-chevron-right text-xs text-matrixGreen/40"></i>
+                `;
+                btn.onclick = () => selectOption(opt, btn, q.correct);
+                container.appendChild(btn);
+            });
+        }
+
+        function selectOption(selectedOpt, btnElement, correctOpt) {
+            if (answeredCurrent) return;
+            answeredCurrent = true;
+
+            const allButtons = document.getElementById('optionsContainer').children;
+            if (String(selectedOpt) === String(correctOpt)) {
+                playSound('success');
+                score += 10;
+                streak++;
+                btnElement.className = "w-full text-left p-3.5 rounded-xl border border-matrixGreen bg-matrixGreen/20 font-code text-white text-base transition-all flex items-center justify-between shadow-[0_0_15px_rgba(0,255,102,0.3)]";
+                btnElement.innerHTML += `<i class="fa-solid fa-circle-check text-matrixGreen text-lg"></i>`;
+            } else {
+                playSound('error');
+                streak = 0;
+                btnElement.className = "w-full text-left p-3.5 rounded-xl border border-red-500 bg-red-950/50 font-code text-white text-base transition-all flex items-center justify-between shadow-[0_0_15px_rgba(239,68,68,0.3)]";
+                btnElement.innerHTML += `<i class="fa-solid fa-circle-xmark text-red-400 text-lg"></i>`;
+
+                for (let btn of allButtons) {
+                    if (btn.innerText.includes(String(correctOpt))) {
+                        btn.className = "w-full text-left p-3.5 rounded-xl border border-matrixGreen bg-matrixGreen/20 font-code text-white text-base transition-all flex items-center justify-between shadow-[0_0_15px_rgba(0,255,102,0.3)]";
+                    }
+                }
+            }
+            document.getElementById('liveScore').innerText = score;
+            document.getElementById('streakCounter').innerText = `Streak: ${streak} 🔥`;
+            document.getElementById('nextBtn').classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            playSound('click');
+            currentQuestionIndex++;
+            loadQuestion();
+        }
+
+        function endQuiz() {
+            clearInterval(timerInterval);
+            playSound('success');
+            document.getElementById('quizScreen').classList.add('hidden');
+            document.getElementById('resultScreen').classList.remove('hidden');
+
+            const total = quizQuestions.length;
+            const maxScore = total * 10;
+            const accuracy = Math.round((score / maxScore) * 100);
+
+            document.getElementById('finalScore').innerText = `${score} / ${maxScore}`;
+            document.getElementById('finalAccuracy').innerText = `${accuracy}%`;
+
+            const mins = Math.floor(secondsElapsed / 60).toString().padStart(2, '0');
+            const secs = (secondsElapsed % 60).toString().padStart(2, '0');
+            document.getElementById('finalTime').innerText = `${mins}:${secs}`;
+        }
+
+        // Cheat Sheet
+        function openReferenceModal() {
+            playSound('click');
+            document.getElementById('cheatSheetPositions').innerHTML = alphabetPositions.map(i => `<div class="p-2 rounded border border-matrixGreen/30 bg-black/50 flex justify-between"><span>${i.letter}</span><span class="text-cyberCyan">${i.num}</span></div>`).join('');
+            document.getElementById('cheatSheetPairs').innerHTML = oppositePairs.map(i => `<div class="p-2 rounded border border-cyberCyan/30 bg-black/50 flex justify-between"><span>${i.a}</span><i class="fa-solid fa-arrows-left-right text-cyberCyan text-[10px]"></i><span>${i.b}</span></div>`).join('');
+            document.getElementById('cheatSheetSquares').innerHTML = squaresData.map(i => `<div class="p-2 rounded border border-yellow-500/30 bg-black/50 flex justify-between"><span class="text-yellow-400">${i.n}²</span><span class="text-white">= ${i.val}</span></div>`).join('');
+            document.getElementById('cheatSheetCubes').innerHTML = cubesData.map(i => `<div class="p-2 rounded border border-pink-500/30 bg-black/50 flex justify-between"><span class="text-pink-400">${i.n}³</span><span class="text-white">= ${i.val}</span></div>`).join('');
+            document.getElementById('referenceModal').classList.remove('hidden');
+        }
+        function closeReferenceModal() {
+            playSound('click');
+            document.getElementById('referenceModal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>

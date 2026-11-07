@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>JAMAL // CYBER STUDY HUB V10</title>
+    <title>JAMAL // CYBER STUDY HUB V11</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts -->
@@ -139,7 +139,7 @@
             <div id="homeScreen" class="w-full space-y-3 pt-1">
                 <div class="text-center space-y-0.5">
                     <h2 class="font-rajdhani text-xl font-black text-white neon-glow-pink uppercase">SELECT PRACTICE HUB</h2>
-                    <p class="text-[11px] text-gray-300 font-code">Maths Hub is active. Reasoning Hub is secure.</p>
+                    <p class="text-[11px] text-gray-300 font-code">Maths Hub active. Reasoning Hub secure.</p>
                 </div>
 
                 <!-- Category Tabs Switcher -->
@@ -148,7 +148,7 @@
                         <i class="fa-solid fa-calculator"></i> Maths Hub
                     </button>
                     <button onclick="switchTab('reasoning')" id="tabBtnReasoning" class="py-2 rounded-lg font-rajdhani font-bold text-xs uppercase transition flex items-center justify-center gap-1.5 text-gray-400 hover:text-white">
-                        <i class="fa-solid fa-brain"></i> Reasoning Hub <i class="fa-solid fa-lock text-[10px] ml-0.5 text-neonPink"></i>
+                        <i class="fa-solid fa-brain"></i> Reasoning Hub <i class="fa-solid fa-lock text-[10px] ml-0.5 text-neonPink" id="reasoningLockIcon"></i>
                     </button>
                 </div>
 
@@ -181,28 +181,28 @@
                     </div>
                 </div>
 
-                <!-- Reasoning Tab Content -->
+                <!-- Reasoning Tab Content (Unlocked once password is entered) -->
                 <div id="tabContentReasoning" class="space-y-3 hidden">
-                    <div onclick="verifyReasoningAccess('position')" class="glass-card p-3.5 rounded-xl border border-matrixGreen/50 box-glow-colorful hover:border-matrixGreen cursor-pointer group flex items-center justify-between transition-all">
+                    <div onclick="startQuiz('position')" class="glass-card p-3.5 rounded-xl border border-matrixGreen/50 box-glow-colorful hover:border-matrixGreen cursor-pointer group flex items-center justify-between transition-all">
                         <div class="flex items-center gap-3">
                             <div class="w-10 h-10 rounded-xl bg-matrixGreen/15 border border-matrixGreen/40 flex items-center justify-center text-matrixGreen text-base shadow-[0_0_10px_rgba(0,255,102,0.3)]">
                                 <i class="fa-solid fa-list-ol"></i>
                             </div>
                             <div>
-                                <h3 class="font-rajdhani text-base font-bold text-white group-hover:text-matrixGreen">Alphabet Positions <i class="fa-solid fa-lock text-xs text-neonPink ml-1"></i></h3>
+                                <h3 class="font-rajdhani text-base font-bold text-white group-hover:text-matrixGreen">Alphabet Positions</h3>
                                 <p class="text-[11px] text-gray-300 font-code">A (1) to Z (26) values</p>
                             </div>
                         </div>
                         <i class="fa-solid fa-chevron-right text-matrixGreen text-xs"></i>
                     </div>
 
-                    <div onclick="verifyReasoningAccess('opposite')" class="glass-card-pink p-3.5 rounded-xl border border-cyberCyan/50 box-glow-colorful hover:border-cyberCyan cursor-pointer group flex items-center justify-between transition-all">
+                    <div onclick="startQuiz('opposite')" class="glass-card-pink p-3.5 rounded-xl border border-cyberCyan/50 box-glow-colorful hover:border-cyberCyan cursor-pointer group flex items-center justify-between transition-all">
                         <div class="flex items-center gap-3">
                             <div class="w-10 h-10 rounded-xl bg-cyberCyan/15 border border-cyberCyan/40 flex items-center justify-center text-cyberCyan text-base shadow-[0_0_10px_rgba(0,240,255,0.3)]">
                                 <i class="fa-solid fa-arrows-left-right"></i>
                             </div>
                             <div>
-                                <h3 class="font-rajdhani text-base font-bold text-white group-hover:text-cyberCyan">Opposite Pairs <i class="fa-solid fa-lock text-xs text-neonPink ml-1"></i></h3>
+                                <h3 class="font-rajdhani text-base font-bold text-white group-hover:text-cyberCyan">Opposite Pairs</h3>
                                 <p class="text-[11px] text-gray-300 font-code">A ↔ Z up to M ↔ N</p>
                             </div>
                         </div>
@@ -282,7 +282,7 @@
 
         </main>
 
-        <!-- Password Modal (Clean placeholder, hidden autocomplete) -->
+        <!-- Password Modal for Reasoning Hub Tab Only -->
         <div id="passwordModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-4">
             <div class="glass-card-pink w-full max-w-sm rounded-2xl border border-neonPink/60 p-5 space-y-4 shadow-[0_0_25px_rgba(255,0,127,0.4)]">
                 <div class="text-center space-y-1">
@@ -290,7 +290,7 @@
                         <i class="fa-solid fa-shield-halved"></i>
                     </div>
                     <h3 class="font-rajdhani font-bold text-lg text-white neon-glow-pink">SECURITY LOCK</h3>
-                    <p class="text-[11px] text-gray-300 font-code">Enter password to access Reasoning Hub.</p>
+                    <p class="text-[11px] text-gray-300 font-code">Enter password to unlock Reasoning Hub.</p>
                 </div>
 
                 <div>
@@ -382,6 +382,8 @@
         }
         setInterval(drawAmbient, 40);
 
+        let reasoningUnlocked = false;
+
         function switchTab(tab) {
             playSound('click');
             const btnMaths = document.getElementById('tabBtnMaths');
@@ -395,18 +397,29 @@
                 contentMaths.classList.remove('hidden');
                 contentReasoning.classList.add('hidden');
             } else {
-                openPasswordModal(tab);
+                if (!reasoningUnlocked) {
+                    openPasswordModal();
+                } else {
+                    activateReasoningTab();
+                }
             }
         }
 
-        let pendingReasoningMode = null;
-        function verifyReasoningAccess(mode) {
-            openPasswordModal(mode);
+        function activateReasoningTab() {
+            const btnMaths = document.getElementById('tabBtnMaths');
+            const btnReasoning = document.getElementById('tabBtnReasoning');
+            const contentMaths = document.getElementById('tabContentMaths');
+            const contentReasoning = document.getElementById('tabContentReasoning');
+
+            btnReasoning.className = "py-2 rounded-lg font-rajdhani font-bold text-xs uppercase transition flex items-center justify-center gap-1.5 bg-neonPink text-white shadow-lg";
+            btnMaths.className = "py-2 rounded-lg font-rajdhani font-bold text-xs uppercase transition flex items-center justify-center gap-1.5 text-gray-400 hover:text-white";
+            contentReasoning.classList.remove('hidden');
+            contentMaths.classList.add('hidden');
+            document.getElementById('reasoningLockIcon').className = "fa-solid fa-unlock text-[10px] ml-0.5 text-matrixGreen";
         }
 
-        function openPasswordModal(mode) {
+        function openPasswordModal() {
             playSound('click');
-            pendingReasoningMode = mode;
             document.getElementById('hubPasswordInput').value = '';
             document.getElementById('passwordError').classList.add('hidden');
             document.getElementById('passwordModal').classList.remove('hidden');
@@ -415,22 +428,15 @@
         function closePasswordModal() {
             playSound('click');
             document.getElementById('passwordModal').classList.add('hidden');
-            pendingReasoningMode = null;
         }
 
         function submitPassword() {
             playSound('click');
             const pwd = document.getElementById('hubPasswordInput').value.trim();
             if (pwd === 'ASDF') {
+                reasoningUnlocked = true;
                 closePasswordModal();
-                document.getElementById('tabBtnReasoning').className = "py-2 rounded-lg font-rajdhani font-bold text-xs uppercase transition flex items-center justify-center gap-1.5 bg-neonPink text-white shadow-lg";
-                document.getElementById('tabBtnMaths').className = "py-2 rounded-lg font-rajdhani font-bold text-xs uppercase transition flex items-center justify-center gap-1.5 text-gray-400 hover:text-white";
-                document.getElementById('tabContentReasoning').classList.remove('hidden');
-                document.getElementById('tabContentMaths').classList.add('hidden');
-
-                if (pendingReasoningMode && pendingReasoningMode !== 'reasoning') {
-                    startQuiz(pendingReasoningMode);
-                }
+                activateReasoningTab();
             } else {
                 playSound('error');
                 document.getElementById('passwordError').classList.remove('hidden');

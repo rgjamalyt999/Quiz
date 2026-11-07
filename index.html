@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>JAMAL // CYBER STUDY HUB V11</title>
+    <title>Jamal Math's & Reasoning Practice Set</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome for icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Orbitron:wght@600;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Premium Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
         tailwind.config = {
@@ -17,6 +17,7 @@
                 extend: {
                     fontFamily: {
                         rajdhani: ['Rajdhani', 'sans-serif'],
+                        orbitron: ['Orbitron', 'sans-serif'],
                         code: ['Fira Code', 'monospace'],
                     },
                     colors: {
@@ -36,9 +37,9 @@
         }
 
         body, html {
-            background: linear-gradient(135deg, #120224, #050b1a, #021a14);
+            background: linear-gradient(135deg, #0d0221, #050b1a, #0f0524, #021a14);
             background-size: 400% 400%;
-            animation: gradientBG 12s ease infinite;
+            animation: gradientBG 10s ease infinite;
             color: #ffffff;
             font-family: 'Rajdhani', sans-serif;
             margin: 0;
@@ -57,41 +58,101 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Colorful & Premium Mobile Portrait Container */
+        /* Mobile Portrait App Frame */
         .phone-container {
             width: 100vw;
             height: 100vh;
             max-width: 440px;
-            background: rgba(10, 14, 28, 0.92);
-            backdrop-filter: blur(16px);
+            background: rgba(8, 12, 24, 0.94);
+            backdrop-filter: blur(18px);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             position: relative;
             overflow: hidden;
-            border-left: 2px solid rgba(0, 240, 255, 0.4);
-            border-right: 2px solid rgba(255, 0, 127, 0.4);
-            box-shadow: 0 0 35px rgba(0, 240, 255, 0.25);
+            border-left: 2px solid rgba(0, 240, 255, 0.45);
+            border-right: 2px solid rgba(255, 0, 127, 0.45);
+            box-shadow: 0 0 40px rgba(0, 240, 255, 0.3);
         }
 
-        .neon-glow-cyan {
-            text-shadow: 0 0 12px rgba(0, 240, 255, 0.8);
+        /* Premium Cyber Glitch Effect for Heading */
+        .glitch-heading {
+            position: relative;
+            color: #ffffff;
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            animation: glitchText 2.5s infinite;
         }
-        .neon-glow-pink {
-            text-shadow: 0 0 12px rgba(255, 0, 127, 0.8);
+
+        @keyframes glitchText {
+            0%, 100% {
+                text-shadow: -2px 0 #ff007f, 2px 0 #00f0ff, 0 0 12px rgba(0, 240, 255, 0.6);
+                transform: translate(0);
+            }
+            20% {
+                text-shadow: 2px 0 #ff007f, -2px 0 #00f0ff, 0 0 15px rgba(255, 0, 127, 0.7);
+            }
+            40% {
+                text-shadow: -2px -1px #00ff66, 2px 1px #ff007f;
+                transform: skewX(-2deg);
+            }
+            42% {
+                transform: skewX(0deg);
+            }
+            60% {
+                text-shadow: 2px 1px #00f0ff, -2px -1px #ff007f, 0 0 18px rgba(0, 240, 255, 0.8);
+            }
+            80% {
+                text-shadow: -1px 0 #ff007f, 1px 0 #00ff66;
+                transform: translate(-1px, 0.5px);
+            }
+            82% {
+                transform: translate(0);
+            }
         }
-        .box-glow-colorful {
-            box-shadow: 0 0 20px rgba(157, 0, 255, 0.25), inset 0 0 10px rgba(0, 240, 255, 0.1);
+
+        .glitch-sub {
+            background: linear-gradient(90deg, #00f0ff, #00ff66, #ff007f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+            letter-spacing: 2px;
         }
+
+        /* Premium Icon Badges */
+        .logo-badge-cyan {
+            background: radial-gradient(circle, rgba(0,240,255,0.25) 0%, rgba(0,0,0,0.8) 100%);
+            border: 1px solid #00f0ff;
+            box-shadow: 0 0 12px rgba(0, 240, 255, 0.5), inset 0 0 8px rgba(0, 240, 255, 0.3);
+        }
+
+        .logo-badge-pink {
+            background: radial-gradient(circle, rgba(255,0,127,0.25) 0%, rgba(0,0,0,0.8) 100%);
+            border: 1px solid #ff007f;
+            box-shadow: 0 0 12px rgba(255, 0, 127, 0.5), inset 0 0 8px rgba(255, 0, 127, 0.3);
+        }
+
+        .logo-badge-green {
+            background: radial-gradient(circle, rgba(0,255,102,0.25) 0%, rgba(0,0,0,0.8) 100%);
+            border: 1px solid #00ff66;
+            box-shadow: 0 0 12px rgba(0, 255, 102, 0.5), inset 0 0 8px rgba(0, 255, 102, 0.3);
+        }
+
         .glass-card {
-            background: rgba(20, 25, 45, 0.85);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 240, 255, 0.3);
+            background: rgba(18, 24, 44, 0.88);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 240, 255, 0.35);
         }
+
         .glass-card-pink {
-            background: rgba(30, 15, 35, 0.85);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 0, 127, 0.3);
+            background: rgba(32, 14, 38, 0.88);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 0, 127, 0.35);
+        }
+
+        .box-glow-colorful {
+            box-shadow: 0 4px 20px rgba(157, 0, 255, 0.25), inset 0 0 10px rgba(0, 240, 255, 0.08);
         }
 
         .scroll-area::-webkit-scrollbar {
@@ -111,147 +172,189 @@
     <!-- Main Container -->
     <div class="phone-container z-10">
 
-        <!-- Top Header HUD -->
-        <header class="w-full border-b border-cyberCyan/30 glass-card py-2.5 px-4 flex justify-between items-center shrink-0">
-            <div class="flex items-center space-x-2.5">
-                <div class="w-8 h-8 rounded-lg border border-cyberCyan flex items-center justify-center bg-cyberCyan/10 shadow-[0_0_10px_#00f0ff]">
-                    <i class="fa-solid fa-bolt text-cyberCyan text-sm"></i>
+        <!-- Top Header with Glitch Heading & Brand Info -->
+        <header class="w-full border-b border-cyberCyan/40 glass-card pt-3 pb-2.5 px-3.5 shrink-0 space-y-2.5">
+            <div class="flex justify-between items-center gap-2">
+                <div class="flex items-center space-x-2.5">
+                    <!-- Premium Brand Logo -->
+                    <div class="w-10 h-10 rounded-xl logo-badge-cyan flex items-center justify-center shrink-0">
+                        <i class="fa-solid fa-graduation-cap text-cyberCyan text-lg"></i>
+                    </div>
+                    <div>
+                        <h1 class="glitch-heading text-xs sm:text-sm font-black leading-tight">
+                            JAMAL MATH'S & REASONING
+                        </h1>
+                        <div class="glitch-sub text-[10px] font-orbitron uppercase tracking-widest mt-0.5">
+                            ⚡ PRACTICE SET PRO ⚡
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <h1 class="font-rajdhani font-bold text-base tracking-wider neon-glow-cyan uppercase leading-none">JAMAL // HUB</h1>
-                    <span class="text-[9px] text-neonPink font-code tracking-widest">PREMIUM STUDY OS</span>
+
+                <!-- Action Buttons -->
+                <div class="flex items-center gap-1.5 shrink-0">
+                    <button onclick="openReferenceModal()" class="w-8 h-8 rounded-lg logo-badge-cyan text-cyberCyan text-xs flex items-center justify-center hover:scale-105 transition" title="Cheat Sheet">
+                        <i class="fa-solid fa-book-open"></i>
+                    </button>
+                    <button onclick="toggleAudio()" id="audioToggleBtn" class="w-8 h-8 rounded-lg logo-badge-pink text-neonPink text-xs flex items-center justify-center hover:scale-105 transition" title="Audio Toggle">
+                        <i class="fa-solid fa-volume-high" id="audioIcon"></i>
+                    </button>
                 </div>
             </div>
-            <div class="flex items-center gap-2">
-                <button onclick="openReferenceModal()" class="w-8 h-8 rounded-lg border border-cyberCyan/60 text-cyberCyan text-xs flex items-center justify-center hover:bg-cyberCyan/20 transition" title="Cheat Sheet">
-                    <i class="fa-solid fa-book-bookmark"></i>
-                </button>
-                <button onclick="toggleAudio()" id="audioToggleBtn" class="w-8 h-8 rounded-lg border border-neonPink text-neonPink text-xs flex items-center justify-center hover:bg-neonPink/20 transition" title="Audio Toggle">
-                    <i class="fa-solid fa-volume-high" id="audioIcon"></i>
-                </button>
+
+            <!-- Address & Contact Bar with Premium Logos -->
+            <div class="grid grid-cols-2 gap-2 pt-1 border-t border-white/10">
+                <!-- Address Badge -->
+                <div class="flex items-center gap-2 bg-black/50 border border-matrixGreen/40 rounded-lg px-2 py-1.5 shadow-[0_0_10px_rgba(0,255,102,0.15)]">
+                    <div class="w-6 h-6 rounded-md logo-badge-green flex items-center justify-center shrink-0">
+                        <i class="fa-solid fa-location-dot text-matrixGreen text-[11px]"></i>
+                    </div>
+                    <div class="overflow-hidden">
+                        <div class="text-[8px] text-gray-400 font-code uppercase leading-none">ADDRESS</div>
+                        <div class="text-[10px] font-bold text-white truncate">Dhumnagar, Ansari Tola</div>
+                    </div>
+                </div>
+
+                <!-- Contact Badge (Clickable Call) -->
+                <a href="tel:9708256311" class="flex items-center gap-2 bg-black/50 border border-neonPink/40 rounded-lg px-2 py-1.5 shadow-[0_0_10px_rgba(255,0,127,0.15)] hover:border-neonPink transition">
+                    <div class="w-6 h-6 rounded-md logo-badge-pink flex items-center justify-center shrink-0 animate-pulse">
+                        <i class="fa-solid fa-phone-volume text-neonPink text-[11px]"></i>
+                    </div>
+                    <div class="overflow-hidden">
+                        <div class="text-[8px] text-gray-400 font-code uppercase leading-none">CONTACT</div>
+                        <div class="text-[11px] font-code font-bold text-cyberCyan truncate">9708256311</div>
+                    </div>
+                </a>
             </div>
         </header>
 
         <!-- Main Workspace Area -->
-        <main class="flex-grow overflow-y-auto scroll-area p-4 flex flex-col justify-start space-y-3.5">
+        <main class="flex-grow overflow-y-auto scroll-area p-3.5 flex flex-col justify-start space-y-3">
 
-            <!-- Home Screen / Tabs (Maths Hub First) -->
-            <div id="homeScreen" class="w-full space-y-3 pt-1">
-                <div class="text-center space-y-0.5">
-                    <h2 class="font-rajdhani text-xl font-black text-white neon-glow-pink uppercase">SELECT PRACTICE HUB</h2>
-                    <p class="text-[11px] text-gray-300 font-code">Maths Hub active. Reasoning Hub secure.</p>
+            <!-- Home Screen / Tabs -->
+            <div id="homeScreen" class="w-full space-y-3">
+                <div class="text-center bg-gradient-to-r from-cyberCyan/10 via-neonPink/10 to-cyberCyan/10 border border-white/10 rounded-xl py-2 px-3">
+                    <h2 class="font-orbitron text-xs font-extrabold text-white tracking-wider uppercase">SELECT PRACTICE MODULE</h2>
+                    <p class="text-[10px] text-gray-300 font-code">Tap any set below to start high-speed practice</p>
                 </div>
 
-                <!-- Category Tabs Switcher -->
-                <div class="grid grid-cols-2 gap-2 p-1.5 bg-black/60 rounded-xl border border-neonPink/40">
-                    <button onclick="switchTab('maths')" id="tabBtnMaths" class="py-2 rounded-lg font-rajdhani font-bold text-xs uppercase transition flex items-center justify-center gap-1.5 bg-cyberCyan text-black shadow-lg">
+                <!-- Category Tabs Switcher (Password ONLY on Reasoning Tab) -->
+                <div class="grid grid-cols-2 gap-2 p-1.5 bg-black/70 rounded-xl border border-cyberCyan/40">
+                    <button onclick="switchTab('maths')" id="tabBtnMaths" class="py-2 rounded-lg font-rajdhani font-bold text-xs uppercase transition flex items-center justify-center gap-1.5 bg-cyberCyan text-black shadow-[0_0_12px_#00f0ff]">
                         <i class="fa-solid fa-calculator"></i> Maths Hub
                     </button>
-                    <button onclick="switchTab('reasoning')" id="tabBtnReasoning" class="py-2 rounded-lg font-rajdhani font-bold text-xs uppercase transition flex items-center justify-center gap-1.5 text-gray-400 hover:text-white">
+                    <button onclick="switchTab('reasoning')" id="tabBtnReasoning" class="py-2 rounded-lg font-rajdhani font-bold text-xs uppercase transition flex items-center justify-center gap-1.5 text-gray-300 hover:text-white">
                         <i class="fa-solid fa-brain"></i> Reasoning Hub <i class="fa-solid fa-lock text-[10px] ml-0.5 text-neonPink" id="reasoningLockIcon"></i>
                     </button>
                 </div>
 
-                <!-- Maths Tab Content -->
-                <div id="tabContentMaths" class="space-y-3">
-                    <div onclick="startQuiz('squares')" class="glass-card p-3.5 rounded-xl border border-yellow-500/50 box-glow-colorful hover:border-yellow-400 cursor-pointer group flex items-center justify-between transition-all">
+                <!-- Maths Tab Content (Default Active) -->
+                <div id="tabContentMaths" class="space-y-2.5">
+                    <div onclick="startQuiz('squares')" class="glass-card p-3.5 rounded-xl border border-yellow-500/50 box-glow-colorful hover:border-yellow-400 cursor-pointer group flex items-center justify-between transition-all active:scale-95">
                         <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-xl bg-yellow-500/15 border border-yellow-500/40 flex items-center justify-center text-yellow-400 text-base shadow-[0_0_10px_rgba(234,179,8,0.3)]">
-                                <i class="fa-solid fa-calculator"></i>
+                            <div class="w-11 h-11 rounded-xl bg-yellow-500/15 border border-yellow-400 flex items-center justify-center text-yellow-400 text-lg shadow-[0_0_12px_rgba(234,179,8,0.4)]">
+                                <i class="fa-solid fa-superscript"></i>
                             </div>
                             <div>
-                                <h3 class="font-rajdhani text-base font-bold text-white group-hover:text-yellow-400">Squares (1 to 30)</h3>
-                                <p class="text-[11px] text-gray-300 font-code">1² = 1 to 30² = 900</p>
+                                <h3 class="font-rajdhani text-base font-bold text-white group-hover:text-yellow-400">Squares Practice (1 to 30)</h3>
+                                <p class="text-[11px] text-gray-300 font-code">1² = 1 se 30² = 900 tak (Full Set)</p>
                             </div>
                         </div>
-                        <i class="fa-solid fa-chevron-right text-yellow-400 text-xs"></i>
+                        <div class="w-7 h-7 rounded-lg bg-yellow-400/20 flex items-center justify-center text-yellow-400">
+                            <i class="fa-solid fa-play text-xs"></i>
+                        </div>
                     </div>
 
-                    <div onclick="startQuiz('cubes')" class="glass-card-pink p-3.5 rounded-xl border border-pink-500/50 box-glow-colorful hover:border-pink-400 cursor-pointer group flex items-center justify-between transition-all">
+                    <div onclick="startQuiz('cubes')" class="glass-card-pink p-3.5 rounded-xl border border-pink-500/50 box-glow-colorful hover:border-pink-400 cursor-pointer group flex items-center justify-between transition-all active:scale-95">
                         <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-xl bg-pink-500/15 border border-pink-500/40 flex items-center justify-center text-pink-400 text-base shadow-[0_0_10px_rgba(236,72,153,0.3)]">
+                            <div class="w-11 h-11 rounded-xl bg-pink-500/15 border border-pink-400 flex items-center justify-center text-pink-400 text-lg shadow-[0_0_12px_rgba(236,72,153,0.4)]">
                                 <i class="fa-solid fa-cube"></i>
                             </div>
                             <div>
-                                <h3 class="font-rajdhani text-base font-bold text-white group-hover:text-pink-400">Cubes (1 to 20)</h3>
-                                <p class="text-[11px] text-gray-300 font-code">1³ = 1 to 20³ = 8000</p>
+                                <h3 class="font-rajdhani text-base font-bold text-white group-hover:text-pink-400">Cubes Practice (1 to 20)</h3>
+                                <p class="text-[11px] text-gray-300 font-code">1³ = 1 se 20³ = 8000 tak (Full Set)</p>
                             </div>
                         </div>
-                        <i class="fa-solid fa-chevron-right text-pink-400 text-xs"></i>
+                        <div class="w-7 h-7 rounded-lg bg-pink-400/20 flex items-center justify-center text-pink-400">
+                            <i class="fa-solid fa-play text-xs"></i>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Reasoning Tab Content (Unlocked once password is entered) -->
-                <div id="tabContentReasoning" class="space-y-3 hidden">
-                    <div onclick="startQuiz('position')" class="glass-card p-3.5 rounded-xl border border-matrixGreen/50 box-glow-colorful hover:border-matrixGreen cursor-pointer group flex items-center justify-between transition-all">
+                <!-- Reasoning Tab Content (Direct Start Once Tab is Unlocked) -->
+                <div id="tabContentReasoning" class="space-y-2.5 hidden">
+                    <div onclick="startQuiz('position')" class="glass-card p-3.5 rounded-xl border border-matrixGreen/50 box-glow-colorful hover:border-matrixGreen cursor-pointer group flex items-center justify-between transition-all active:scale-95">
                         <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-xl bg-matrixGreen/15 border border-matrixGreen/40 flex items-center justify-center text-matrixGreen text-base shadow-[0_0_10px_rgba(0,255,102,0.3)]">
-                                <i class="fa-solid fa-list-ol"></i>
+                            <div class="w-11 h-11 rounded-xl bg-matrixGreen/15 border border-matrixGreen flex items-center justify-center text-matrixGreen text-lg shadow-[0_0_12px_rgba(0,255,102,0.4)]">
+                                <i class="fa-solid fa-arrow-down-a-z"></i>
                             </div>
                             <div>
-                                <h3 class="font-rajdhani text-base font-bold text-white group-hover:text-matrixGreen">Alphabet Positions</h3>
-                                <p class="text-[11px] text-gray-300 font-code">A (1) to Z (26) values</p>
+                                <h3 class="font-rajdhani text-base font-bold text-white group-hover:text-matrixGreen">Alphabet Positions (A - Z)</h3>
+                                <p class="text-[11px] text-gray-300 font-code">A = 1 se Z = 26 tak (Full 26 Set)</p>
                             </div>
                         </div>
-                        <i class="fa-solid fa-chevron-right text-matrixGreen text-xs"></i>
+                        <div class="w-7 h-7 rounded-lg bg-matrixGreen/20 flex items-center justify-center text-matrixGreen">
+                            <i class="fa-solid fa-play text-xs"></i>
+                        </div>
                     </div>
 
-                    <div onclick="startQuiz('opposite')" class="glass-card-pink p-3.5 rounded-xl border border-cyberCyan/50 box-glow-colorful hover:border-cyberCyan cursor-pointer group flex items-center justify-between transition-all">
+                    <div onclick="startQuiz('opposite')" class="glass-card-pink p-3.5 rounded-xl border border-cyberCyan/50 box-glow-colorful hover:border-cyberCyan cursor-pointer group flex items-center justify-between transition-all active:scale-95">
                         <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-xl bg-cyberCyan/15 border border-cyberCyan/40 flex items-center justify-center text-cyberCyan text-base shadow-[0_0_10px_rgba(0,240,255,0.3)]">
+                            <div class="w-11 h-11 rounded-xl bg-cyberCyan/15 border border-cyberCyan flex items-center justify-center text-cyberCyan text-lg shadow-[0_0_12px_rgba(0,240,255,0.4)]">
                                 <i class="fa-solid fa-arrows-left-right"></i>
                             </div>
                             <div>
-                                <h3 class="font-rajdhani text-base font-bold text-white group-hover:text-cyberCyan">Opposite Pairs</h3>
-                                <p class="text-[11px] text-gray-300 font-code">A ↔ Z up to M ↔ N</p>
+                                <h3 class="font-rajdhani text-base font-bold text-white group-hover:text-cyberCyan">Opposite Letter Pairs</h3>
+                                <p class="text-[11px] text-gray-300 font-code">A ↔ Z se M ↔ N tak (Full 13 Set)</p>
                             </div>
                         </div>
-                        <i class="fa-solid fa-chevron-right text-cyberCyan text-xs"></i>
+                        <div class="w-7 h-7 rounded-lg bg-cyberCyan/20 flex items-center justify-center text-cyberCyan">
+                            <i class="fa-solid fa-play text-xs"></i>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Quiz Screen -->
-            <div id="quizScreen" class="w-full hidden space-y-3.5 pt-1">
+            <div id="quizScreen" class="w-full hidden space-y-3">
                 <div class="glass-card p-2.5 rounded-xl border border-cyberCyan/40 flex justify-between items-center">
-                    <button onclick="returnToHome()" class="px-2.5 py-1 rounded-lg border border-red-500/50 text-red-400 hover:bg-red-500/20 text-[11px] font-code font-bold">
-                        <i class="fa-solid fa-arrow-left mr-1"></i> ABORT
+                    <button onclick="returnToHome()" class="px-2.5 py-1 rounded-lg border border-red-500/60 bg-red-500/10 text-red-400 hover:bg-red-500/20 text-[11px] font-code font-bold">
+                        <i class="fa-solid fa-arrow-left mr-1"></i> EXIT
                     </button>
                     <div class="text-center">
-                        <div class="text-[9px] text-neonPink font-code uppercase" id="quizTitleBadge">SQUARES</div>
-                        <div class="text-xs font-rajdhani font-bold text-white">Q: <span id="currentQNum">1</span> / <span id="totalQNum">15</span></div>
+                        <div class="text-[9px] text-neonPink font-code uppercase tracking-wider" id="quizTitleBadge">SQUARES</div>
+                        <div class="text-xs font-rajdhani font-bold text-white">QUESTION <span id="currentQNum">1</span> / <span id="totalQNum">30</span></div>
                     </div>
                     <div class="text-right">
                         <div class="text-[9px] text-gray-400 font-code">SCORE</div>
-                        <div class="font-rajdhani font-bold text-cyberCyan text-sm" id="liveScore">0</div>
+                        <div class="font-rajdhani font-bold text-matrixGreen text-sm" id="liveScore">0</div>
                     </div>
                 </div>
 
                 <div class="glass-card p-4 rounded-xl border border-neonPink/50 box-glow-colorful relative overflow-hidden text-center">
-                    <div class="absolute top-1 right-2 opacity-15 text-6xl font-rajdhani font-black text-neonPink pointer-events-none" id="watermarkChar">1²</div>
-                    <span class="text-[9px] font-code text-neonPink bg-neonPink/15 px-2.5 py-0.5 rounded-full border border-neonPink/40 uppercase">CHALLENGE TARGET</span>
+                    <div class="absolute top-1 right-2 opacity-15 text-5xl font-orbitron font-black text-neonPink pointer-events-none" id="watermarkChar">1²</div>
+                    <span class="text-[9px] font-code text-cyberCyan bg-cyberCyan/15 px-2.5 py-0.5 rounded-full border border-cyberCyan/40 uppercase">SELECT CORRECT ANSWER</span>
                     <h3 class="text-base sm:text-lg font-rajdhani font-bold text-white mt-1.5 tracking-wide" id="questionPrompt">What is the exact value?</h3>
                 </div>
 
-                <div class="grid grid-cols-1 gap-2.5" id="optionsContainer"></div>
+                <div class="grid grid-cols-1 gap-2" id="optionsContainer"></div>
 
                 <div class="flex justify-between items-center pt-1">
-                    <span class="text-xs font-code text-gray-300" id="streakCounter">Streak: 0 🔥</span>
-                    <button id="nextBtn" onclick="nextQuestion()" class="hidden px-5 py-2 rounded-xl bg-cyberCyan text-black font-rajdhani font-bold text-xs hover:shadow-[0_0_15px_#00f0ff] transition-all flex items-center gap-1">
-                        NEXT <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                    <span class="text-xs font-code text-yellow-400" id="streakCounter">Streak: 0 🔥</span>
+                    <button id="nextBtn" onclick="nextQuestion()" class="hidden px-5 py-2 rounded-xl bg-gradient-to-r from-cyberCyan to-matrixGreen text-black font-orbitron font-bold text-xs shadow-[0_0_15px_#00f0ff] transition-all flex items-center gap-1.5">
+                        NEXT <i class="fa-solid fa-forward-step text-[10px]"></i>
                     </button>
                 </div>
             </div>
 
             <!-- Result Screen -->
-            <div id="resultScreen" class="w-full hidden space-y-4 text-center pt-4">
+            <div id="resultScreen" class="w-full hidden space-y-3 text-center pt-2">
                 <div class="glass-card p-5 rounded-2xl border border-matrixGreen/50 box-glow-colorful space-y-3.5">
-                    <div class="w-14 h-14 rounded-full border-2 border-matrixGreen bg-matrixGreen/15 mx-auto flex items-center justify-center shadow-[0_0_15px_#00ff66]">
+                    <div class="w-14 h-14 rounded-full logo-badge-green mx-auto flex items-center justify-center">
                         <i class="fa-solid fa-trophy text-xl text-matrixGreen"></i>
                     </div>
                     <div>
-                        <h2 class="font-rajdhani text-xl font-black text-white neon-glow-cyan">SESSION COMPLETE</h2>
-                        <p class="text-[10px] text-neonPink font-code">[ STATS RECORDED SUCCESSFULLY ]</p>
+                        <h2 class="glitch-heading text-lg font-black text-white">PRACTICE COMPLETE</h2>
+                        <p class="text-[10px] text-cyberCyan font-code mt-0.5">JAMAL MATH'S & REASONING REPORT</p>
                     </div>
 
                     <div class="grid grid-cols-3 gap-2 py-2.5 border-y border-cyberCyan/30 text-xs">
@@ -271,10 +374,10 @@
 
                     <div class="flex gap-2 justify-center pt-1">
                         <button onclick="restartCurrentQuiz()" class="px-4 py-2 rounded-xl bg-cyberCyan text-black font-rajdhani font-bold text-xs flex items-center gap-1">
-                            <i class="fa-solid fa-rotate-right"></i> RETRY
+                            <i class="fa-solid fa-rotate-right"></i> PLAY AGAIN
                         </button>
                         <button onclick="returnToHome()" class="px-4 py-2 rounded-xl border border-cyberCyan text-cyberCyan font-rajdhani font-bold text-xs flex items-center gap-1">
-                            <i class="fa-solid fa-house"></i> MENU
+                            <i class="fa-solid fa-house"></i> HOME
                         </button>
                     </div>
                 </div>
@@ -282,25 +385,25 @@
 
         </main>
 
-        <!-- Password Modal for Reasoning Hub Tab Only -->
+        <!-- Password Modal ONLY for Switching to Reasoning Tab -->
         <div id="passwordModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-4">
             <div class="glass-card-pink w-full max-w-sm rounded-2xl border border-neonPink/60 p-5 space-y-4 shadow-[0_0_25px_rgba(255,0,127,0.4)]">
                 <div class="text-center space-y-1">
-                    <div class="w-12 h-12 rounded-xl bg-neonPink/20 border border-neonPink/50 mx-auto flex items-center justify-center text-neonPink text-xl mb-2">
-                        <i class="fa-solid fa-shield-halved"></i>
+                    <div class="w-12 h-12 rounded-xl logo-badge-pink mx-auto flex items-center justify-center text-neonPink text-xl mb-2">
+                        <i class="fa-solid fa-user-lock"></i>
                     </div>
-                    <h3 class="font-rajdhani font-bold text-lg text-white neon-glow-pink">SECURITY LOCK</h3>
-                    <p class="text-[11px] text-gray-300 font-code">Enter password to unlock Reasoning Hub.</p>
+                    <h3 class="font-orbitron font-bold text-base text-white">REASONING HUB LOCKED</h3>
+                    <p class="text-[11px] text-gray-300 font-code">Enter security password to unlock tab.</p>
                 </div>
 
                 <div>
-                    <input type="password" id="hubPasswordInput" placeholder="Enter password" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="w-full bg-black/60 border border-neonPink/50 rounded-xl px-4 py-2.5 text-white font-code text-sm text-center tracking-widest focus:outline-none focus:border-neonPink">
-                    <p id="passwordError" class="text-[10px] text-red-400 font-code text-center mt-1.5 hidden">Incorrect password!</p>
+                    <input type="password" id="hubPasswordInput" placeholder="Enter Security Password" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" onkeydown="if(event.key==='Enter') submitPassword()" class="w-full bg-black/70 border border-neonPink/50 rounded-xl px-4 py-2.5 text-white font-code text-sm text-center tracking-widest focus:outline-none focus:border-cyberCyan">
+                    <p id="passwordError" class="text-[10px] text-red-400 font-code text-center mt-1.5 hidden">Access Denied! Incorrect password.</p>
                 </div>
 
                 <div class="flex gap-2 pt-1">
                     <button onclick="closePasswordModal()" class="w-1/2 py-2 rounded-xl border border-gray-600 text-gray-300 font-rajdhani font-bold text-xs hover:bg-gray-800 transition">CANCEL</button>
-                    <button onclick="submitPassword()" class="w-1/2 py-2 rounded-xl bg-neonPink text-white font-rajdhani font-bold text-xs hover:shadow-[0_0_15px_#ff007f] transition">UNLOCK</button>
+                    <button onclick="submitPassword()" class="w-1/2 py-2 rounded-xl bg-neonPink text-white font-rajdhani font-bold text-xs shadow-[0_0_15px_#ff007f] transition">UNLOCK</button>
                 </div>
             </div>
         </div>
@@ -309,8 +412,8 @@
         <div id="referenceModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm hidden flex items-center justify-center p-3">
             <div class="phone-container w-full h-[90vh] rounded-2xl glass-card border border-cyberCyan/60 flex flex-col overflow-hidden">
                 <div class="p-3 border-b border-cyberCyan/30 flex justify-between items-center bg-black/80">
-                    <h3 class="font-rajdhani font-bold text-xs text-cyberCyan flex items-center gap-1.5">
-                        <i class="fa-solid fa-database"></i> MASTER REFERENCE SHEET
+                    <h3 class="font-orbitron font-bold text-xs text-cyberCyan flex items-center gap-1.5">
+                        <i class="fa-solid fa-book-bookmark"></i> FORMULA & CHART SHEET
                     </h3>
                     <button onclick="closeReferenceModal()" class="text-gray-400 hover:text-white px-2 py-1 rounded border border-gray-700 text-xs">
                         <i class="fa-solid fa-xmark"></i>
@@ -338,15 +441,20 @@
 
                 <div class="p-3 border-t border-cyberCyan/30 text-center bg-black/80">
                     <button onclick="closeReferenceModal()" class="w-full py-2 rounded-xl bg-cyberCyan text-black font-rajdhani font-bold text-xs">
-                        CLOSE REFERENCE
+                        CLOSE CHART
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- Footer -->
-        <footer class="w-full border-t border-cyberCyan/20 py-2 text-center text-[10px] text-gray-400 font-code shrink-0">
-            <span>JAMAL CYBER OS // SECURE & CLEAN</span>
+        <!-- Professional Footer with Branding -->
+        <footer class="w-full border-t border-cyberCyan/30 bg-black/80 py-2 px-3 flex justify-between items-center text-[9px] font-code shrink-0">
+            <span class="text-gray-300 flex items-center gap-1">
+                <i class="fa-solid fa-map-pin text-matrixGreen"></i> Dhumnagar, Ansari Tola
+            </span>
+            <a href="tel:9708256311" class="text-cyberCyan font-bold flex items-center gap-1 hover:underline">
+                <i class="fa-solid fa-headset text-neonPink"></i> 9708256311
+            </a>
         </footer>
 
     </div>
@@ -362,14 +470,14 @@
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
 
-        const symbols = '★✦✧◆◇■□▲△●○0123456789ABCDEF+*#@';
+        const symbols = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ+-=×÷';
         const fontSize = 14;
         let columns = canvas.width / fontSize;
         const rainDrops = [];
         for (let x = 0; x < columns; x++) rainDrops[x] = 1;
 
         function drawAmbient() {
-            ctx.fillStyle = 'rgba(10, 14, 28, 0.08)';
+            ctx.fillStyle = 'rgba(8, 12, 24, 0.1)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.fillStyle = '#00f0ff';
             ctx.font = fontSize + 'px monospace';
@@ -380,7 +488,7 @@
                 rainDrops[i]++;
             }
         }
-        setInterval(drawAmbient, 40);
+        setInterval(drawAmbient, 45);
 
         let reasoningUnlocked = false;
 
@@ -392,8 +500,10 @@
             const contentReasoning = document.getElementById('tabContentReasoning');
 
             if (tab === 'maths') {
-                btnMaths.className = "py-2 rounded-lg font-rajdhani font-bold text-xs uppercase transition flex items-center justify-center gap-1.5 bg-cyberCyan text-black shadow-lg";
-                btnReasoning.className = "py-2 rounded-lg font-rajdhani font-bold text-xs uppercase transition flex items-center justify-center gap-1.5 text-gray-400 hover:text-white";
+                reasoningUnlocked = false;
+                document.getElementById('reasoningLockIcon').className = "fa-solid fa-lock text-[10px] ml-0.5 text-neonPink";
+                btnMaths.className = "py-2 rounded-lg font-rajdhani font-bold text-xs uppercase transition flex items-center justify-center gap-1.5 bg-cyberCyan text-black shadow-[0_0_12px_#00f0ff]";
+                btnReasoning.className = "py-2 rounded-lg font-rajdhani font-bold text-xs uppercase transition flex items-center justify-center gap-1.5 text-gray-300 hover:text-white";
                 contentMaths.classList.remove('hidden');
                 contentReasoning.classList.add('hidden');
             } else {
@@ -411,18 +521,18 @@
             const contentMaths = document.getElementById('tabContentMaths');
             const contentReasoning = document.getElementById('tabContentReasoning');
 
-            btnReasoning.className = "py-2 rounded-lg font-rajdhani font-bold text-xs uppercase transition flex items-center justify-center gap-1.5 bg-neonPink text-white shadow-lg";
-            btnMaths.className = "py-2 rounded-lg font-rajdhani font-bold text-xs uppercase transition flex items-center justify-center gap-1.5 text-gray-400 hover:text-white";
+            btnReasoning.className = "py-2 rounded-lg font-rajdhani font-bold text-xs uppercase transition flex items-center justify-center gap-1.5 bg-neonPink text-white shadow-[0_0_12px_#ff007f]";
+            btnMaths.className = "py-2 rounded-lg font-rajdhani font-bold text-xs uppercase transition flex items-center justify-center gap-1.5 text-gray-300 hover:text-white";
             contentReasoning.classList.remove('hidden');
             contentMaths.classList.add('hidden');
             document.getElementById('reasoningLockIcon').className = "fa-solid fa-unlock text-[10px] ml-0.5 text-matrixGreen";
         }
 
         function openPasswordModal() {
-            playSound('click');
             document.getElementById('hubPasswordInput').value = '';
             document.getElementById('passwordError').classList.add('hidden');
             document.getElementById('passwordModal').classList.remove('hidden');
+            setTimeout(() => document.getElementById('hubPasswordInput').focus(), 100);
         }
 
         function closePasswordModal() {
@@ -431,11 +541,11 @@
         }
 
         function submitPassword() {
-            playSound('click');
-            const pwd = document.getElementById('hubPasswordInput').value.trim();
+            const pwd = document.getElementById('hubPasswordInput').value.trim().toUpperCase();
             if (pwd === 'ASDF') {
+                playSound('success');
                 reasoningUnlocked = true;
-                closePasswordModal();
+                document.getElementById('passwordModal').classList.add('hidden');
                 activateReasoningTab();
             } else {
                 playSound('error');
@@ -460,8 +570,8 @@
                     const gain = audioCtx.createGain();
                     osc.connect(gain); gain.connect(audioCtx.destination);
                     osc.type = 'sine';
-                    osc.frequency.setValueAtTime(700, now);
-                    osc.frequency.exponentialRampToValueAtTime(1100, now + 0.03);
+                    osc.frequency.setValueAtTime(800, now);
+                    osc.frequency.exponentialRampToValueAtTime(1250, now + 0.03);
                     gain.gain.setValueAtTime(0.03, now);
                     gain.gain.exponentialRampToValueAtTime(0.001, now + 0.03);
                     osc.start(now); osc.stop(now + 0.03);
@@ -533,6 +643,7 @@
             document.getElementById('quizTitleBadge').innerText = mode.toUpperCase();
             document.getElementById('totalQNum').innerText = quizQuestions.length;
             document.getElementById('liveScore').innerText = score;
+            document.getElementById('streakCounter').innerText = `Streak: 0 🔥`;
 
             startTimer();
             loadQuestion();
@@ -556,7 +667,7 @@
         function generateQuestions() {
             quizQuestions = [];
             if (currentMode === 'squares') {
-                const shuffled = [...squaresData].sort(() => 0.5 - Math.random()).slice(0, 15);
+                const shuffled = [...squaresData].sort(() => 0.5 - Math.random());
                 shuffled.forEach(item => {
                     let wrong = [];
                     while(wrong.length < 3) {
@@ -567,7 +678,7 @@
                     quizQuestions.push({ prompt: `Value of Square [ ${item.n}² ]?`, watermark: `${item.n}²`, correct: item.val, options });
                 });
             } else if (currentMode === 'cubes') {
-                const shuffled = [...cubesData].sort(() => 0.5 - Math.random()).slice(0, 15);
+                const shuffled = [...cubesData].sort(() => 0.5 - Math.random());
                 shuffled.forEach(item => {
                     let wrong = [];
                     while(wrong.length < 3) {
@@ -578,7 +689,7 @@
                     quizQuestions.push({ prompt: `Value of Cube [ ${item.n}³ ]?`, watermark: `${item.n}³`, correct: item.val, options });
                 });
             } else if (currentMode === 'position') {
-                const shuffled = [...alphabetPositions].sort(() => 0.5 - Math.random()).slice(0, 15);
+                const shuffled = [...alphabetPositions].sort(() => 0.5 - Math.random());
                 shuffled.forEach(item => {
                     let wrong = [];
                     while(wrong.length < 3) {
@@ -624,7 +735,7 @@
 
             q.options.forEach((opt, idx) => {
                 const btn = document.createElement('button');
-                btn.className = "w-full text-left p-3.5 rounded-xl border border-cyberCyan/40 bg-black/70 hover:border-cyberCyan font-code text-white text-sm transition-all flex items-center justify-between shadow";
+                btn.className = "w-full text-left p-3 rounded-xl border border-cyberCyan/40 bg-black/70 hover:border-cyberCyan font-code text-white text-sm transition-all flex items-center justify-between shadow";
                 btn.innerHTML = `
                     <span class="flex items-center gap-3">
                         <span class="w-7 h-7 rounded-lg border border-cyberCyan/50 bg-cyberCyan/10 flex items-center justify-center text-xs text-cyberCyan font-rajdhani font-bold">${['A', 'B', 'C', 'D'][idx]}</span>
@@ -646,17 +757,18 @@
                 playSound('success');
                 score += 10;
                 streak++;
-                btnElement.className = "w-full text-left p-3.5 rounded-xl border border-matrixGreen bg-matrixGreen/20 font-code text-white text-sm transition-all flex items-center justify-between shadow-[0_0_15px_rgba(0,255,102,0.4)]";
+                btnElement.className = "w-full text-left p-3 rounded-xl border border-matrixGreen bg-matrixGreen/20 font-code text-white text-sm transition-all flex items-center justify-between shadow-[0_0_15px_rgba(0,255,102,0.4)]";
                 btnElement.innerHTML += `<i class="fa-solid fa-circle-check text-matrixGreen text-base"></i>`;
             } else {
                 playSound('error');
                 streak = 0;
-                btnElement.className = "w-full text-left p-3.5 rounded-xl border border-red-500 bg-red-950/60 font-code text-white text-sm transition-all flex items-center justify-between shadow-[0_0_15px_rgba(239,68,68,0.4)]";
+                btnElement.className = "w-full text-left p-3 rounded-xl border border-red-500 bg-red-950/60 font-code text-white text-sm transition-all flex items-center justify-between shadow-[0_0_15px_rgba(239,68,68,0.4)]";
                 btnElement.innerHTML += `<i class="fa-solid fa-circle-xmark text-red-400 text-base"></i>`;
 
                 for (let btn of allButtons) {
-                    if (btn.innerText.includes(String(correctOpt))) {
-                        btn.className = "w-full text-left p-3.5 rounded-xl border border-matrixGreen bg-matrixGreen/20 font-code text-white text-sm transition-all flex items-center justify-between shadow-[0_0_15px_rgba(0,255,102,0.4)]";
+                    const optVal = btn.querySelector('span > span:nth-child(2)').innerText;
+                    if (String(optVal) === String(correctOpt)) {
+                        btn.className = "w-full text-left p-3 rounded-xl border border-matrixGreen bg-matrixGreen/20 font-code text-white text-sm transition-all flex items-center justify-between shadow-[0_0_15px_rgba(0,255,102,0.4)]";
                     }
                 }
             }
